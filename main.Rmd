@@ -1,14 +1,47 @@
 ---
 title: "Final Statistical Inference Project"
-output: html_notebook
+output:
+  pdf_document: default
+  html_notebook: default
+  html_document: default
 ---
 
-
+## Overview
+This is the final statistical inference project. I will investigate the exponential distribution in R and compare it with the CLT. 
 
 ```{r}
-plot(cars)
+set.seed(123)
+#Distribution of 40 
+dist <- rexp(40,.2)
+hist(dist)
 ```
 
-Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+The mean of all of these distributions is as follows:
+```{r}
+mean(dist)
+```
+The expected mean is 1/.2 = 5. We get a value close to this, but not exact. We expect other trials to be closer and further.
 
-When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+The variance is done below:
+
+```{r}
+var(dist)
+```
+The variance of the distribution is 17.4, whereas the expected variance is (1/.2)^2 = 25. This is a much larger difference than the mean, presumably because of the outlier in the 20s region. 
+
+Now this will be done 1000 times to see if the average mean is close to the actual mean.
+
+```{r}
+mns = NULL
+for (i in 1:1000) mns = c(mns, mean(rexp(40,.2)))
+hist(mns)
+var(mns)
+```
+
+As shown in the figure, the distribution is approximately normal. More accurately, the mean has a denser population than the rest, and it is roughly equal drop off on both sides. 
+
+
+
+
+
+

@@ -1,0 +1,24 @@
+---
+title: "part2"
+author: "Kesavan Kushalnagar"
+date: "November 7, 2017"
+output: pdf_document
+---
+
+```{r}
+data(ToothGrowth)
+summary(ToothGrowth)
+oj <- ToothGrowth[ToothGrowth$supp == "OJ",]
+vc <- ToothGrowth[ToothGrowth$supp == "VC",]
+p05 <-ToothGrowth[ToothGrowth$dose == .5,] 
+p1 <-ToothGrowth[ToothGrowth$dose == 1,]
+p2 <-ToothGrowth[ToothGrowth$dose == 2,]
+t.test(oj$len - vc$len)
+t.test(p05$len)$conf.int
+t.test(p1$len)$conf.int
+t.test(p2$len)$conf.int
+```
+
+A oj - vs t test is done. This checks if the difference is not equal to zero. The p-value is .003, so we can safely reject the null hypothesis. Also, as the confidence interval is positive, the oj creates longer odontoblasts compared to the vc treatment. 
+
+A confidence interval is calculated for the other 3. Each of the t tests can be ran to verify that the p values are low enough to be significant. The main takeaway is that a larger dose results in a larger mean, and that they all have similar confidence interval ranges (from 3 to 4). This means that more vitamin C likely results in increased tooth growth.
